@@ -1,6 +1,6 @@
 <?php
 
-namespace StartPack\AdminBundle;
+namespace startpack\AdminBundle;
 
 use Symfony\Component\HttpKernel\Bundle\Bundle;
 
