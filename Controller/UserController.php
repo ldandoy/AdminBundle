@@ -31,7 +31,8 @@ class UserController extends AbstractCoreController
 		$users = $this->getDoctrine()->getRepository('CoreBundle:User')->findAll();
 
         return array(
-            "users"  =>  $users
+            "users"  =>  $users,
+            'activeUser' => true
         );
     }
     

@@ -6,41 +6,38 @@
 {% block body %}
     <div class="row marginTop30px">
     	<div class="span12">
+            <h2>Liste des utilisateurs</h2>
 
     		<table id="myTable" class="tablesorter"> 
-<thead> 
-<tr> 
-    <th>Last Name</th> 
-</tr> 
-</thead> 
-<tbody> 
-<tr> 
-    <td>Smith</td>
-</tr>
-<tr> 
-    <td>Aronmith</td> 
-</tr> 
-</tbody> 
-</table> 
+                <thead> 
+                    <tr> 
+                        <th>Email</th> 
+                    </tr> 
+                </thead> 
+                <tbody>
+                    {% for user in users %}
+                        <tr> 
+                            <td>{{ user.email }}</td>
+                        </tr>
+                    {% endfor %}
+                </tbody> 
+            </table> 
 
-<script type="text/javascript">
-$(document).ready(function() 
-    { 
-        // $("#myTable").tablesorter();
-        $("#myTable").tablecloth({
-            theme: "stats",
-            striped: true,
-            sortable: true,
-            condensed: false,
-            bordered: false,
-            clean: false
-        });
-    } 
-); 
-</script>
-			{% for user in users %}
-				{{ user.email }}
-			{% endfor %}
+            <script type="text/javascript">
+                $(document).ready(function() 
+                    { 
+                        // $("#myTable").tablesorter();
+                        $("#myTable").tablecloth({
+                            theme: "stats",
+                            striped: true,
+                            sortable: true,
+                            condensed: false,
+                            bordered: false,
+                            clean: false
+                        });
+                    } 
+                ); 
+            </script>
 		</div>
 	</div>
 {% endblock %}
