@@ -11,15 +11,14 @@
 <thead> 
 <tr> 
     <th>Last Name</th> 
-    <th>First Name</th> 
-    <th>Email</th> 
-    <th>Due</th> 
-    <th>Web Site</th> 
 </tr> 
 </thead> 
 <tbody> 
 <tr> 
-    <td>Smith</td> 
+    <td>Smith</td>
+</tr>
+<tr> 
+    <td>Aronmith</td> 
 </tr> 
 </tbody> 
 </table> 
@@ -27,7 +26,15 @@
 <script type="text/javascript">
 $(document).ready(function() 
     { 
-        $("#myTable").tablesorter(); 
+        // $("#myTable").tablesorter();
+        $("#myTable").tablecloth({
+            theme: "stats",
+            striped: true,
+            sortable: true,
+            condensed: false,
+            bordered: false,
+            clean: false
+        });
     } 
 ); 
 </script>
