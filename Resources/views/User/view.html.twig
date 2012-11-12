@@ -1,0 +1,54 @@
+{# src/Acme/BlogBundle/Resources/views/Default/index.html.twig #}
+{% extends 'AdminBundle:Base:base.html.twig' %}
+
+{% block title %}StartPack | Admin - Login{% endblock %}
+
+{% block body %}
+    <div class="row marginTop30px">
+    	<div class="span12">
+            <h2 class="fLeft">Liste des utilisateurs</h2>
+            <div class="fRight">
+                <a href="" class="btn btn-info"><i class="icon-pencil"></i> Editer</a>
+                <a href="" class="btn btn-danger"><i class="icon-trash"></i> Supprimer</a>
+            </div>
+            <br class="sep" /> 
+    		<table id="myTable" class="tablesorter"> 
+                <thead> 
+                    <tr> 
+                        <th colspan="2">User: {{ user.id }}</th>
+                    </tr>
+                </thead> 
+                <tbody>
+                    <tr> 
+                        <td>ID</td>
+                        <td>{{ user.id }}</td>
+                    </tr>
+                    <tr>
+                        <td>Email</td>
+                        <td>{{ user.email }}</td>
+                    </tr>
+                </tbody> 
+            </table>
+
+            <p align="right">
+                <a href="{{ path('user_index') }}" class="btn">Retour</a>
+            </p>
+		</div>
+	</div>
+
+    <script type="text/javascript">
+        $(document).ready(function() 
+            { 
+                // $("#myTable").tablesorter();
+                $("#myTable").tablecloth({
+                    theme: "stats",
+                    striped: true,
+                    sortable: true,
+                    condensed: false,
+                    bordered: false,
+                    clean: false
+                });
+            }
+        ); 
+    </script>
+{% endblock %}

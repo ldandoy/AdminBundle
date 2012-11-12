@@ -6,18 +6,25 @@
 {% block body %}
     <div class="row marginTop30px">
     	<div class="span12">
-            <h2>Liste des utilisateurs</h2>
-
+            <h2 class="fLeft">Liste des utilisateurs</h2>
+            <div class="fRight">
+                <a href="" class="btn btn-success"><i class="icon-plus"></i> Ajouter un utilisateur</a>
+            </div>
+            <br class="sep" /> 
     		<table id="myTable" class="tablesorter"> 
                 <thead> 
                     <tr> 
-                        <th>Email</th> 
-                    </tr> 
+                        <th>ID</th>
+                        <th>Email</th>
+                        <th width="100">Action</th> 
+                    </tr>
                 </thead> 
                 <tbody>
                     {% for user in users %}
-                        <tr> 
+                        <tr>
+                            <td>{{ user.id }}</td>
                             <td>{{ user.email }}</td>
+                            <td><a href="{{ path('user_view', {'id': user.id}) }}"><i class="icon-eye-open"></i></a> <a href=""><i class="icon-pencil"></i></a> <a href=""><i class="icon-trash"></i></a></td>
                         </tr>
                     {% endfor %}
                 </tbody> 
@@ -35,7 +42,7 @@
                             bordered: false,
                             clean: false
                         });
-                    } 
+                    }
                 ); 
             </script>
 		</div>

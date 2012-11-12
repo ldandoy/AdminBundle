@@ -13,6 +13,8 @@ use Symfony\Component\HttpFoundation\File\UploadedFile;
 use StartPack\CoreBundle\Entity as Model;
 use StartPack\CoreBundle\Form as Form;
 
+use StartPack\CoreBundle\Entity\User;
+
 use StartPack\CoreBundle\Controller\AbstractCoreController;
 
 
@@ -36,4 +38,15 @@ class UserController extends AbstractCoreController
         );
     }
     
+    /**
+     * @Route("/{id}/view", name="user_view")
+     * @Template()
+     */
+    public function viewAction(User $user)
+    {
+        return array(
+            "user"  =>  $user,
+            'activeUser' => true
+        );
+    }
 }
