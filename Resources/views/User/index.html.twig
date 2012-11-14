@@ -1,4 +1,3 @@
-{# src/Acme/BlogBundle/Resources/views/Default/index.html.twig #}
 {% extends 'AdminBundle:Base:base.html.twig' %}
 
 {% block title %}StartPack | Admin - Login{% endblock %}
@@ -8,7 +7,7 @@
     	<div class="span12">
             <h2 class="fLeft">Liste des utilisateurs</h2>
             <div class="fRight">
-                <a href="" class="btn btn-success"><i class="icon-plus"></i> Ajouter un utilisateur</a>
+                <a href="{{ path('user_add') }}" class="btn btn-success"><i class="icon-plus"></i> Ajouter un utilisateur</a>
             </div>
             <br class="sep" /> 
     		<table id="myTable" class="tablesorter"> 

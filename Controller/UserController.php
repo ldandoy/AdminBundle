@@ -49,4 +49,18 @@ class UserController extends AbstractCoreController
             'activeUser' => true
         );
     }
+
+    /**
+     * @Route("/add", name="user_add")
+     * @Template()
+     */
+    public function addAction()
+    {
+        $form = $this->createForm(new Form\UserType(), new Model\User());
+
+        return array(
+            "form"  =>  $form->createView(),
+            'activeUser' => true
+        );
+    }
 }
