@@ -14,7 +14,6 @@ use StartPack\CoreBundle\Entity as Model;
 use StartPack\CoreBundle\Form as Form;
 
 use StartPack\CoreBundle\Entity\User;
-
 use StartPack\CoreBundle\Controller\AbstractCoreController;
 
 
@@ -30,7 +29,7 @@ class UserController extends AbstractCoreController
 	 */
     public function indexAction()
     {
-		$users = $this->getDoctrine()->getRepository('CoreBundle:User')->findAll();
+        $users = $this->getDoctrine()->getRepository('CoreBundle:User')->findAll();
 
         return array(
             "users"  =>  $users,
@@ -47,6 +46,20 @@ class UserController extends AbstractCoreController
         return array(
             "user"  =>  $user,
             'activeUser' => true
+        );
+    }
+    
+    /**
+     * @Route("/edit/{id}", name="user_edit")
+     * @Template()
+     */
+    public function editAction(User $user)
+    {
+        $form = $this->createForm(new Form\UserType(),$user);
+        
+        return array(
+            "user"  =>  $user,
+            'form' => $form
         );
     }
 }
