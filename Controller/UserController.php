@@ -13,8 +13,6 @@ use Symfony\Component\HttpFoundation\File\UploadedFile;
 use StartPack\CoreBundle\Entity as Model;
 use StartPack\CoreBundle\Form as Form;
 
-use StartPack\CoreBundle\Entity\User;
-
 use StartPack\CoreBundle\Controller\AbstractCoreController;
 
 
@@ -25,7 +23,7 @@ class UserController extends AbstractCoreController
 {
 
 	/**
-	 * @Route("/", name="user_index")
+	 * @Route("/", name="admin_user_index")
 	 * @Template()
 	 */
     public function indexAction()
@@ -39,10 +37,10 @@ class UserController extends AbstractCoreController
     }
     
     /**
-     * @Route("/{id}/view", name="user_view")
+     * @Route("/{id}/view", name="admin_user_view")
      * @Template()
      */
-    public function viewAction(User $user)
+    public function viewAction(Model\User $user)
     {
         return array(
             "user"  =>  $user,
@@ -51,7 +49,7 @@ class UserController extends AbstractCoreController
     }
 
     /**
-     * @Route("/add", name="user_add")
+     * @Route("/add", name="admin_user_add")
      * @Template()
      */
     public function addAction()
