@@ -1,0 +1,24 @@
+{% form_theme form 'AdminBundle:Form:form_admin.html.twig' %}
+{% extends 'AdminBundle:Base:base.html.twig' %}
+
+
+{% block title %}StartPack | Admin - add user{% endblock %}
+
+{% block body %}
+    <div class="row marginTop30px">
+    	<div class="span12">
+            <h2 class="fLeft">Ajouter un utilisateur</h2>
+            <br class="sep" /> 
+    		<form action="" metod="post">
+                <div class="">
+                    <div class="fLeft width30p">{{ form_label(form.email) }}</div>
+                    <div class="fLeft width50p">{{ form_widget(form.email) }} {{ form_errors(form.email) }}</div>
+                    <br class="sep" />
+                </div>
+            </form>
+            <p align="right">
+                <a href="{{ path('user_index') }}" class="btn">Retour</a>
+            </p>
+		</div>
+	</div>
+{% endblock %}

@@ -48,6 +48,7 @@ class UserController extends AbstractCoreController
             'activeUser' => true
         );
     }
+
     
     /**
      * @Route("/edit/{id}", name="user_edit")
@@ -57,9 +58,35 @@ class UserController extends AbstractCoreController
     {
         $form = $this->createForm(new Form\UserType(),$user);
         
+        $request = $this->get('request');
+        if($request->getMethod() == 'POST'){
+            $form->bind($request);
+            die($form->getErrorsAsString());
+            if($form->isValid()){
+                $em = $this->getDoctrine()->getEntityManager();
+                $em->persist($user);
+                $em->flush();
+                return $this->redirect($this->generateUrl('user_edit',array('id' => $user->getId())));
+            }
+        }
         return array(
             "user"  =>  $user,
-            'form' => $form
+            'form' => $form->createView()
+        );
+    }
+    
+    /**
+     * @Route("/add", name="user_add")
+     * @Template()
+     */
+    public function addAction()
+    {
+        $form = $this->createForm(new Form\UserType(), new Model\User());
+        
+        
+        return array(
+            "form"  =>  $form->createView(),
+            'activeUser' => true
         );
     }
 }

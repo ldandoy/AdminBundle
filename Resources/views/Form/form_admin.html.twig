@@ -1,0 +1,33 @@
+{% extends 'form_div_layout.html.twig' %}
+
+{% block field_row %}
+{% spaceless %}
+    <div>
+        {{ form_label(form, label|default(null)) }}
+        {{ form_errors(form) }}
+        {{ form_widget(form) }}
+    </div>
+{% endspaceless %}
+{% endblock field_row %}
+
+{% block field_widget %}
+{% spaceless %}
+    {% set type = type|default('text') %}
+    <input type="{{ type }}" placeholder="{{ label|trans }}" {{ block('widget_attributes') }} {% if value is not empty %}value="{{ value }}" {% endif %} class="width100p" />
+{% endspaceless %}
+{% endblock field_widget %}
+
+{% block generic_label %}
+{% spaceless %}
+    {% if required %}
+        {% set attr = attr|merge({'class': attr.class|default('') ~ ' required'}) %}
+    {% endif %}
+    <label{% for attrname,attrvalue in attr %} {{attrname}}="{{attrvalue}}"{% endfor %}>{{ label|trans }}</label>
+{% endspaceless %}
+{% endblock %}
+
+{% block date_widget %}
+{% spaceless %}
+    <input type="text" placeholder="{{ label|trans }}" {{ block('widget_attributes') }} {% if value is not empty %}value="{{ value.day }}/{{ value.month }}/{{ value.year }}" {% endif %} class="width100p" />
+{% endspaceless %}
+{% endblock date_widget %}
