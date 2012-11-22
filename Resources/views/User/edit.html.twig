@@ -1,0 +1,64 @@
+{# src/Acme/BlogBundle/Resources/views/Default/index.html.twig #}
+{% extends 'AdminBundle:Base:base.html.twig' %}
+
+{% block title %}StartPack | Admin - Edit{% endblock %}
+
+{% block body %}
+    
+    <div class="row marginTop30px">
+    	<div class="span12">
+            <h2 class="fLeft">{{ user.userInfo.firstName ~ ' ' ~ user.userInfo.lastName }}</h2>
+            <br class="sep" /> 
+    		<form action="" method="post">
+                    {{ form_rest(form) }}
+                    <div class="">
+                        <div class="fLeft width30p">{{ form_label(form.userInfo.lastName) }}</div>
+                        <div class="fLeft width50p">{{ form_widget(form.userInfo.lastName) }}  {{ form_errors(form.userInfo.lastName) }}</div>
+                        <br class="sep" />
+                    </div>
+                        
+                    <div class="">
+                        <div class="fLeft width30p">{{ form_label(form.userInfo.firstName) }}</div>
+                        <div class="fLeft width50p">{{ form_widget(form.userInfo.firstName) }}  {{ form_errors(form.userInfo.firstName) }}</div>
+                        <br class="sep" />
+                    </div>
+                        
+                    <div class="">
+                        <div class="fLeft width30p">{{ form_label(form.email) }}</div>
+                        <div class="fLeft width50p">{{ form_widget(form.email) }}  {{ form_errors(form.email) }}</div>
+                        <br class="sep" />
+                    </div>
+                        
+                        
+                    <div class="">
+                        <div class="fLeft width30p">{{ form_label(form.userInfo.address) }}</div>
+                        <div class="fLeft width50p">{{ form_widget(form.userInfo.address) }}  {{ form_errors(form.userInfo.address) }}</div>
+                        <br class="sep" />
+                    </div>
+                    
+                    <div class="">
+                        <div class="fLeft width30p">{{ form_label(form.userInfo.cp) }}</div>
+                        <div class="fLeft width50p">{{ form_widget(form.userInfo.cp) }}  {{ form_errors(form.userInfo.cp) }}</div>
+                        <br class="sep" />
+                    </div>
+                        
+                    <div class="">
+                        <div class="fLeft width30p">{{ form_label(form.userInfo.ville) }}</div>
+                        <div class="fLeft width50p">{{ form_widget(form.userInfo.ville) }}  {{ form_errors(form.userInfo.ville) }}</div>
+                        <br class="sep" />
+                    </div>
+                        
+                    <div class="">
+                        <div class="fLeft width30p">{{ form_label(form.userInfo.optin) }}</div>
+                        <div class="fLeft width50p">{{ form_widget(form.userInfo.optin) }}  {{ form_errors(form.userInfo.optin) }}</div>
+                        <br class="sep" />
+                    </div>
+                    <input type="submit" class="btn btn-success" value="Valider"/>
+                </form>
+            
+            <p align="right">
+                <a href="{{ path('user_index') }}" class="btn">Retour</a>
+            </p>
+        </div>
+    </div>
+{% endblock %}

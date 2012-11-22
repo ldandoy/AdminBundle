@@ -12,7 +12,6 @@ use Symfony\Component\HttpFoundation\File\UploadedFile;
 
 use StartPack\CoreBundle\Entity as Model;
 use StartPack\CoreBundle\Form as Form;
-
 use StartPack\CoreBundle\Controller\AbstractCoreController;
 
 
@@ -28,7 +27,7 @@ class UserController extends AbstractCoreController
 	 */
     public function indexAction()
     {
-		$users = $this->getDoctrine()->getRepository('CoreBundle:User')->findAll();
+        $users = $this->getDoctrine()->getRepository('CoreBundle:User')->findAll();
 
         return array(
             "users"  =>  $users,
@@ -48,6 +47,32 @@ class UserController extends AbstractCoreController
         );
     }
 
+    
+    /**
+     * @Route("/edit/{id}", name="user_edit")
+     * @Template()
+     */
+    public function editAction(User $user)
+    {
+        $form = $this->createForm(new Form\UserType(),$user);
+        
+        $request = $this->get('request');
+        if($request->getMethod() == 'POST'){
+            $form->bind($request);
+            die($form->getErrorsAsString());
+            if($form->isValid()){
+                $em = $this->getDoctrine()->getEntityManager();
+                $em->persist($user);
+                $em->flush();
+                return $this->redirect($this->generateUrl('user_edit',array('id' => $user->getId())));
+            }
+        }
+        return array(
+            "user"  =>  $user,
+            'form' => $form->createView()
+        );
+    }
+    
     /**
      * @Route("/add", name="admin_user_add")
      * @Template()
@@ -55,7 +80,8 @@ class UserController extends AbstractCoreController
     public function addAction()
     {
         $form = $this->createForm(new Form\UserType(), new Model\User());
-
+        
+        
         return array(
             "form"  =>  $form->createView(),
             'activeUser' => true

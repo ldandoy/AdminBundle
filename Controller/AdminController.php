@@ -22,19 +22,19 @@ use StartPack\CoreBundle\Controller\AbstractCoreController;
 class AdminController extends AbstractCoreController
 {
 
-	/**
-	 * @Route("/", name="admin_index")
-	 * @Template()
-	 */
+    /**
+     * @Route("/", name="admin_index")
+     * @Template()
+     */
     public function indexAction()
     {
-		return array();
+        return array();
     }
 
-	/**
-	 * @Route("/login", name="admin_login")
-	 * @Template()
-	 */
+    /**
+     * @Route("/login", name="admin_login")
+     * @Template()
+     */
     public function loginAction()
     {
     	if ($this->get('request')->attributes->has(SecurityContext::AUTHENTICATION_ERROR)) {
