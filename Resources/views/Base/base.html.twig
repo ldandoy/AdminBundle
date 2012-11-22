@@ -25,17 +25,15 @@
         <div class="navbar navbar-fixed-top navbar-inverse">
             <div class="navbar-inner">
                 <div class="container">
-                    <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                    </a>
                     <a class="brand" href="/admin/"><span class="tRed">StartPack</span></a>
                     <div class="nav-collapse">
                         {% if is_granted('ROLE_ADMIN') %}
                         <ul class="nav">
                             <li class="{% if activeUser is defined %}active{% endif %}">
-                                <a href="{{ path('user_index') }}">User</a>
+                                <a href="{{ path('admin_user_index') }}">User</a>
+                            </li>
+                            <li class="{% if activeCMS is defined %}active{% endif %}">
+                                <a href="{{ path('admin_cms_index') }}">CMS</a>
                             </li>
                         </ul>
                         <form class="form-inline nav pull-right" method="post" action="{{ path('admin_logout') }}">
