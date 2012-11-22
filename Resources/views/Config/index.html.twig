@@ -1,0 +1,26 @@
+{% extends 'AdminBundle:Base:base.html.twig' %}
+
+{% block title %}StartPack | Admin - Login{% endblock %}
+
+{% block body %}
+    <div class="row">
+    	<div class="span12">
+            <div class="page-header">
+                <h3 class=="fLeft">Configuration du site</h3>
+                <br class="sep" />
+            </div>
+		</div>
+	</div>
+
+    {% for config in configs %}
+        <div class="row">
+            <div class="span4">
+                <label for="">{{ config.label }}</label>
+            </div>
+
+            <div class="span8">
+                <input type="text" class="span8" value="{{ config.value }}" />
+            </div>
+        </div>
+    {% endfor %}
+{% endblock %}

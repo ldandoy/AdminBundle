@@ -35,6 +35,9 @@
                             <li class="{% if activeCMS is defined %}active{% endif %}">
                                 <a href="{{ path('admin_cms_index') }}">CMS</a>
                             </li>
+                            <li class="{% if activeConfig is defined %}active{% endif %}">
+                                <a href="{{ path('admin_config_index') }}">Configuration</a>
+                            </li>
                         </ul>
                         <form class="form-inline nav pull-right" method="post" action="{{ path('admin_logout') }}">
                             <button class="btn btn-danger" type="submit">Déconnexion</button>

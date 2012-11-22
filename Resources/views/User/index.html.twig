@@ -3,13 +3,15 @@
 {% block title %}StartPack | Admin - Login{% endblock %}
 
 {% block body %}
-    <div class="row marginTop30px">
+    <div class="row">
     	<div class="span12">
-            <h2 class="fLeft">Liste des utilisateurs</h2>
-            <div class="fRight">
-                <a href="{{ path('admin_user_add') }}" class="btn btn-success"><i class="icon-plus"></i> Ajouter un utilisateur</a>
+            <div class="page-header">
+                <h3 class="fLeft">Liste des utilisateurs</h3>
+                <div class="fRight">
+                    <a href="{{ path('admin_user_add') }}" class="btn btn-success"><i class="icon-plus"></i> Ajouter un utilisateur</a>
+                </div>
+                <br class="sep" />
             </div>
-            <br class="sep" /> 
     		<table id="myTable" class="tablesorter"> 
                 <thead> 
                     <tr> 
