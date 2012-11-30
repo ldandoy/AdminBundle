@@ -29,10 +29,29 @@ class ConfigController extends AbstractCoreController
     public function indexAction()
     {
 		$configs = $this->getDoctrine()->getRepository('CoreBundle:Config')->findAll();
+        $form = $this->createForm(new Form\ConfigType(), new Model\Config());
 
         return array(
             "configs"  =>  $configs,
-            'activeConfig' => true
+            'activeConfig' => true,
+            'form' => $form->createView()
         );
+    }
+
+    /**
+     * @Route("/add", name="admin_config_add")
+     * @Template()
+     */
+    public function addAction () {
+        $config = new Model\Config();
+        $form = $this->createForm(new Form\ConfigType(), $config);
+
+        if($this->getRequest()->getMethod() == 'POST'){
+            $form->bind($this->getRequest());
+            if($form->isValid()){
+                $this->saveAndFlush($config);
+                // return $this->redirect($this->generateUrl('admin_config_index'));
+            }
+        }
     }
 }

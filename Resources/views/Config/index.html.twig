@@ -1,4 +1,5 @@
 {% extends 'AdminBundle:Base:base.html.twig' %}
+{% form_theme form 'AdminBundle:Form:form_admin.html.twig' %}
 
 {% block title %}StartPack | Admin - Login{% endblock %}
 
@@ -6,7 +7,10 @@
     <div class="row">
     	<div class="span12">
             <div class="page-header">
-                <h3 class=="fLeft">Configuration du site</h3>
+                <h3 class="fLeft">Configuration du site</h3>
+                <div class="fRight">
+                    <a href="#myModal" role="button" data-toggle="modal" class="btn btn-success"><i class="icon-plus"></i> Ajouter un paramètre</a>
+                </div>
                 <br class="sep" />
             </div>
 		</div>
@@ -23,4 +27,34 @@
             </div>
         </div>
     {% endfor %}
+
+    <div id="myModal" class="modal hide fade">
+        <form action="{{ path('admin_config_add') }}" method="post">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h3>Ajouter une paramètre de config</h3>
+            </div>
+            <div class="modal-body">
+                <div class="">
+                    <div class="fLeft width30p">{{ form_label(form.label ) }}</div>
+                    <div class="fLeft width50p">{{ form_widget(form.label ) }}  {{ form_errors(form.label ) }}</div>
+                    <br class="sep" />
+                </div>
+                <div class="">
+                    <div class="fLeft width30p">{{ form_label(form.key ) }}</div>
+                    <div class="fLeft width50p">{{ form_widget(form.key ) }}  {{ form_errors(form.key ) }}</div>
+                    <br class="sep" />
+                </div>
+                <div class="">
+                    <div class="fLeft width30p">{{ form_label(form.value ) }}</div>
+                    <div class="fLeft width50p">{{ form_widget(form.value ) }}  {{ form_errors(form.value ) }}</div>
+                    <br class="sep" />
+                </div>
+            </div>
+            <div class="modal-footer">
+                <a href="#" class="btn" class="close" data-dismiss="modal" aria-hidden="true">Close</a>
+                <button class="btn btn-primary">Save changes</button>
+            </div>
+        </form>
+    </div>
 {% endblock %}
