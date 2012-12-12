@@ -21,10 +21,10 @@ use StartPack\CoreBundle\Controller\AbstractCoreController;
 class UserController extends AbstractCoreController
 {
 
-	/**
-	 * @Route("/", name="admin_user_index")
-	 * @Template()
-	 */
+    /**
+     * @Route("/", name="admin_user_index")
+     * @Template()
+     */
     public function indexAction()
     {
         $users = $this->getDoctrine()->getRepository('CoreBundle:User')->findAll();
@@ -49,27 +49,27 @@ class UserController extends AbstractCoreController
 
     
     /**
-     * @Route("/edit/{id}", name="user_edit")
+     * @Route("/edit/{id}", name="admin_user_edit")
      * @Template()
      */
-    public function editAction(User $user)
+    public function editAction(Model\User $user)
     {
         $form = $this->createForm(new Form\UserType(),$user);
         
         $request = $this->get('request');
         if($request->getMethod() == 'POST'){
             $form->bind($request);
-            die($form->getErrorsAsString());
             if($form->isValid()){
                 $em = $this->getDoctrine()->getEntityManager();
                 $em->persist($user);
                 $em->flush();
-                return $this->redirect($this->generateUrl('user_edit',array('id' => $user->getId())));
+                return $this->redirect($this->generateUrl('admin_user_edit',array('id' => $user->getId())));
             }
         }
         return array(
             "user"  =>  $user,
-            'form' => $form->createView()
+            'form' => $form->createView(),
+            'activeUser' => true
         );
     }
     
@@ -80,11 +80,9 @@ class UserController extends AbstractCoreController
     public function addAction()
     {
         $form = $this->createForm(new Form\UserType(), new Model\User());
-        
-        
         return array(
             "form"  =>  $form->createView(),
-            'activeUser' => true
+            "activeUser" => true
         );
     }
 }

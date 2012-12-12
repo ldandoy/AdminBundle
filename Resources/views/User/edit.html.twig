@@ -9,8 +9,9 @@
     	<div class="span12">
             <h2 class="fLeft">{{ user.userInfo.firstName ~ ' ' ~ user.userInfo.lastName }}</h2>
             <br class="sep" /> 
-    		<form action="" method="post">
-                    {{ form_rest(form) }}
+    		<form method="post">
+                    {{ form_widget(form._token) }}
+                    {{ form_errors(form) }}
                     <div class="">
                         <div class="fLeft width30p">{{ form_label(form.userInfo.lastName) }}</div>
                         <div class="fLeft width50p">{{ form_widget(form.userInfo.lastName) }}  {{ form_errors(form.userInfo.lastName) }}</div>
@@ -57,7 +58,7 @@
                 </form>
             
             <p align="right">
-                <a href="{{ path('user_index') }}" class="btn">Retour</a>
+                <a href="{{ path('admin_user_index') }}" class="btn">Retour</a>
             </p>
         </div>
     </div>

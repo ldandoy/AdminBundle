@@ -25,7 +25,10 @@
                         <tr>
                             <td>{{ user.id }}</td>
                             <td>{{ user.email }}</td>
-                            <td><a href="{{ path('admin_user_view', {'id': user.id}) }}"><i class="icon-eye-open"></i></a> <a href=""><i class="icon-pencil"></i></a> <a href=""><i class="icon-trash"></i></a></td>
+                            <td>
+                                <a href="{{ path('admin_user_view', {'id': user.id}) }}"><i class="icon-eye-open"></i></a>
+                                <a href="{{ path('admin_user_edit',{'id' : user.id}) }}"><i class="icon-pencil"></i></a>
+                                <a href=""><i class="icon-trash"></i></a></td>
                         </tr>
                     {% endfor %}
                 </tbody> 
