@@ -1,7 +1,8 @@
-<!DOCTYPE html>
-<html>
-    <head>
-        <title>{% block title %}StartPack{% endblock %}</title>
+{% extends 'MopaBootstrapBundle::base.html.twig' %}
+{% from 'MopaBootstrapBundle::macros.html.twig' import label, badge %}
+
+    {% block title %}StartPack{% endblock %}
+    {% block head_style %}
         <meta name="description" content="description de la page" />
         <meta name="keywords" content="keywords de la page" />
         
@@ -20,36 +21,8 @@
         <script src="{{ asset('bundles/admin/js/jquery.tablecloth.js') }}" type="text/javascript"></script>
         <script src="{{ asset('bundles/admin/js/jquery.tablesorter.min.js') }}" type="text/javascript"></script>
         {% block js %}{% endblock %}
-    </head>
-    <body>
-        <div class="navbar navbar-fixed-top navbar-inverse">
-            <div class="navbar-inner">
-                <div class="container">
-                    <a class="brand" href="/admin/"><span class="tRed">StartPack</span></a>
-                    <div class="nav-collapse">
-                        {% if is_granted('ROLE_ADMIN') %}
-                        <ul class="nav">
-                            <li class="{% if activeUser is defined %}active{% endif %}">
-                                <a href="{{ path('admin_user_index') }}">User</a>
-                            </li>
-                            <li class="{% if activeCMS is defined %}active{% endif %}">
-                                <a href="{{ path('admin_cms_index') }}">CMS</a>
-                            </li>
-                            <li class="{% if activeConfig is defined %}active{% endif %}">
-                                <a href="{{ path('admin_config_index') }}">Configuration</a>
-                            </li>
-                        </ul>
-                        <form class="form-inline nav pull-right" method="post" action="{{ path('admin_logout') }}">
-                            <button class="btn btn-danger" type="submit">Déconnexion</button>
-                        </form>
-                        {% endif %}
-                    </div><!--/.nav-collapse -->
-                </div>
-            </div>
-        </div>
+    {% endblock head_style %}
 
-        <div class="container">
-            {% block body %}{% endblock %}
-        </div><!-- /container -->
-    </body>
-</html>
+    {% block container_class %}{% endblock container_class %}
+
+    {% block footer %}<p>&copy; Renault Trucks 2012</p>{% endblock %}

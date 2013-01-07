@@ -34,15 +34,21 @@ class AdminController extends AbstractCoreController
     /**
      * @Route("/login", name="admin_login")
      * @Template()
+     * 
+     * @return Array
      */
     public function loginAction()
     {
-    	if ($this->get('request')->attributes->has(SecurityContext::AUTHENTICATION_ERROR)) {
+        if ($this->get('request')->attributes->has(SecurityContext::AUTHENTICATION_ERROR)) {
             $error = $this->get('request')->attributes->get(SecurityContext::AUTHENTICATION_ERROR);
         } else {
             $error = $this->get('request')->getSession()->get(SecurityContext::AUTHENTICATION_ERROR);
         }
-        return array();
+
+        return array(
+            'error' => $error,
+            'last_username' => $this->get('session')->get(SecurityContext::LAST_USERNAME)
+        );
     }
 
     /**

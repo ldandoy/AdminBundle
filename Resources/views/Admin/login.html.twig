@@ -1,37 +1,35 @@
 {% extends 'AdminBundle:Base:base.html.twig' %}
 
-{% block title %}StartPack | Admin - Login{% endblock %}
+{% block title %}{{ parent() }} Login{% endblock %}
 
-{% block body %}
-    <div class="row marginTop30px">
-    	<div class="span3">&nbsp;</div>
-		<div class="span6">
-			<div id="loginbox" class="well">
-        		<div class="boxhdr">
-        			&nbsp;
-        		</div>
-        		<div class="boxbody">
-        			<form action="{{ path('admin_login_check') }}" method="post" class="form-horizontal">
-        				<div class="control-group">
-        					<label class="control-label" for="">Email</label>
-        					<div class="controls">
-        						<input type="text" class="span3" name="_username" placeholder="Email">
-        					</div>
-        				</div>
-        				<div class="control-group">
-        					<label class="control-label" for="">Mot de passe</label>
-        					<div class="controls">
-    							<input type="password" class="span3" name="_password" placeholder="Mot de passe">
-    						</div>
-    					</div>
-                        <br class="sep" />
-                        <p class="tRight">
-    					   <button type="submit" name="_submit" class="btn btn-danger">Sign in</button>
-                        </p>
-        			</form>
-        		</div>
-    	   </div>
-		</div>
-		<div class="span3">&nbsp;</div>
-    </div>
+{% block content %}
+    <form action="{{ path('admin_login_check') }}" method="post" class="form-horizontal">
+
+        {% if error is not empty %}
+            {{ error.message }}
+        {% endif %}
+
+        <div class="control-group">
+            <label class="control-label" for="">Email</label>
+            <div class=" controls">
+                <div class="input-prepend">
+                    <span class="add-on"><i class="icon-user"></i></span>
+                    <input type="text" class="span25" name="_username" value="{{ last_username }}" placeholder="Email">
+                </div>
+            </div>
+        </div>
+        <div class="control-group">
+            <label class="control-label" for="">Mot de passe</label>
+            <div class=" controls">
+                <div class="input-prepend">
+                    <span class="add-on"><i class="icon-lock"></i></span>
+                    <input type="password" class="span25" name="_password" placeholder="Mot de passe">
+                </div>
+            </div>
+        </div>
+        <br class="sep" />
+        <p>
+            <button type="submit" name="_submit" class="btn">Se connecter</button>
+        </p>
+    </form>
 {% endblock %}
