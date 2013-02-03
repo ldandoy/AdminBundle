@@ -15,43 +15,36 @@ use StartPack\CoreBundle\Form as Form;
 
 use StartPack\CoreBundle\Controller\AbstractCoreController;
 
-
 /**
  * @Route("/admin/config")
  */
-class ConfigController extends AbstractCoreController
-{
+class ConfigController extends AbstractCoreController {
 
 	/**
 	 * @Route("/", name="admin_config_index")
 	 * @Template()
 	 */
-    public function indexAction()
-    {
+	public function indexAction() {
 		$configs = $this->getDoctrine()->getRepository('CoreBundle:Config')->findAll();
-        $form = $this->createForm(new Form\ConfigType(), new Model\Config());
+		$form = $this->createForm(new Form\ConfigType(), new Model\Config());
 
-        return array(
-            "configs"  =>  $configs,
-            'activeConfig' => true,
-            'form' => $form->createView()
-        );
-    }
+		return array("configs" => $configs, 'activeConfig' => true, 'form' => $form->createView());
+	}
 
-    /**
-     * @Route("/add", name="admin_config_add")
-     * @Template()
-     */
-    public function addAction () {
-        $config = new Model\Config();
-        $form = $this->createForm(new Form\ConfigType(), $config);
+	/**
+	 * @Route("/add", name="admin_config_add")
+	 * @Template()
+	 */
+	public function addAction() {
+		$config = new Model\Config();
+		$form = $this->createForm(new Form\ConfigType(), $config);
 
-        if($this->getRequest()->getMethod() == 'POST'){
-            $form->bind($this->getRequest());
-            if($form->isValid()){
-                $this->saveAndFlush($config);
-                // return $this->redirect($this->generateUrl('admin_config_index'));
-            }
-        }
-    }
+		if ($this->getRequest()->getMethod() == 'POST') {
+			$form->bind($this->getRequest());
+			if ($form->isValid()) {
+				$this->saveAndFlush($config);
+				// return $this->redirect($this->generateUrl('admin_config_index'));
+			}
+		}
+	}
 }

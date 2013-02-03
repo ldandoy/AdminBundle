@@ -15,56 +15,47 @@ use StartPack\CoreBundle\Form as Form;
 
 use StartPack\CoreBundle\Controller\AbstractCoreController;
 
-
 /**
  * @Route("/admin")
  */
-class AdminController extends AbstractCoreController
-{
+class AdminController extends AbstractCoreController {
 
-    /**
-     * @Route("/", name="admin_index")
-     * @Template()
-     */
-    public function indexAction()
-    {
-        return array();
-    }
+	/**
+	 * @Route("/", name="admin_index")
+	 * @Template()
+	 */
+	public function indexAction() {
+		return array();
+	}
 
-    /**
-     * @Route("/login", name="admin_login")
-     * @Template()
-     * 
-     * @return Array
-     */
-    public function loginAction()
-    {
-        if ($this->get('request')->attributes->has(SecurityContext::AUTHENTICATION_ERROR)) {
-            $error = $this->get('request')->attributes->get(SecurityContext::AUTHENTICATION_ERROR);
-        } else {
-            $error = $this->get('request')->getSession()->get(SecurityContext::AUTHENTICATION_ERROR);
-        }
+	/**
+	 * @Route("/login", name="admin_login")
+	 * @Template()
+	 * 
+	 * @return Array
+	 */
+	public function loginAction() {
+		if ($this->get('request')->attributes->has(SecurityContext::AUTHENTICATION_ERROR)) {
+			$error = $this->get('request')->attributes->get(SecurityContext::AUTHENTICATION_ERROR);
+		} else {
+			$error = $this->get('request')->getSession()->get(SecurityContext::AUTHENTICATION_ERROR);
+		}
 
-        return array(
-            'error' => $error,
-            'last_username' => $this->get('session')->get(SecurityContext::LAST_USERNAME)
-        );
-    }
+		return array('error' => $error, 'last_username' => $this->get('session')->get(SecurityContext::LAST_USERNAME));
+	}
 
-    /**
-     * @Route("/login_check", name="admin_login_check")
-     */
-    public function securityCheckAction()
-    {
-        // The security layer will intercept this request
-    }
+	/**
+	 * @Route("/login_check", name="admin_login_check")
+	 */
+	public function securityCheckAction() {
+		// The security layer will intercept this request
+	}
 
-    /**
-     * @Route("/logout", name="admin_logout")
-     */
-    public function logoutAction()
-    {
-        // The security layer will intercept this request
-    }
-    
+	/**
+	 * @Route("/logout", name="admin_logout")
+	 */
+	public function logoutAction() {
+		// The security layer will intercept this request
+	}
+
 }
