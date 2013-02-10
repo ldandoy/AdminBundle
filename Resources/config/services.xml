@@ -18,8 +18,7 @@
 				<argument key="fixedTop">true</argument>
 				<argument key="inverse">true</argument>
 				<argument key="isFluid">false</argument>
-				<argument key="template">AdminBundle:Navbar:navbar.html.twig
-				</argument>
+				<argument key="template">AdminBundle:Navbar:navbar.html.twig</argument>
 			</argument>
 			<tag name="mopa_bootstrap.navbar" alias="frontendNavbar" />
 		</service>
