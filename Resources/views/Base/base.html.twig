@@ -6,23 +6,71 @@
         <meta name="description" content="description de la page" />
         <meta name="keywords" content="keywords de la page" />
         
+        <script src="//code.jquery.com/jquery-1.9.1.min.js"></script>
+        
         <link rel="stylesheet" href="{{ asset('bundles/admin/css/utils.css') }}" type="text/css" />
         <link href="//netdna.bootstrapcdn.com/twitter-bootstrap/2.2.2/css/bootstrap.no-icons.min.css" rel="stylesheet" />
         <link href="//netdna.bootstrapcdn.com/font-awesome/3.0/css/font-awesome.css" rel="stylesheet" />
         <link href="//netdna.bootstrapcdn.com/font-awesome/3.0/css/font-awesome-ie7.css" rel="stylesheet" />
-        <link href="//code.jquery.com/ui/1.9.2/themes/base/jquery-ui.css" rel="stylesheet" />
+        <link href="//code.jquery.com/ui/1.10.1/themes/base/jquery-ui.css" rel="stylesheet" />
         <link rel="stylesheet" href="{{ asset('bundles/admin/css/admin.css') }}" type="text/css" />
         <link rel="stylesheet" href="{{ asset('bundles/admin/css/tablecloth.css') }}" type="text/css" />
         {% block css %}{% endblock %}
+    {% endblock head_style %}
 
-        <script src="//code.jquery.com/jquery-1.8.3.js" type="text/javascript"></script>
-        <script src="//code.jquery.com/ui/1.9.2/jquery-ui.js" type="text/javascript"></script>
+    {% block foot_script %}
+        <script src="//code.jquery.com/ui/1.10.1/jquery-ui.js" type="text/javascript"></script>
         <script src="//netdna.bootstrapcdn.com/twitter-bootstrap/2.2.2/js/bootstrap.min.js"></script>
         <script src="{{ asset('bundles/admin/js/jquery.tablecloth.js') }}" type="text/javascript"></script>
         <script src="{{ asset('bundles/admin/js/jquery.tablesorter.min.js') }}" type="text/javascript"></script>
-        {% block js %}{% endblock %}
-    {% endblock head_style %}
-
-    {% block container_class %}container{% endblock container_class %}
-
-    {% block footer %}<p>&copy; Renault Trucks 2012</p>{% endblock %}
+    {% endblock foot_script %}
+    
+    {% block container %}
+    <div class="{% block container_class %}container{% endblock container_class %}">
+        {% block header %}
+        {% endblock header %}
+        
+        <div class="content">
+            {% block page_header %}
+            <div class="page-header">
+                  <h1>{% block headline %}Mopa Bootstrap Bundle{% endblock headline %}</h1>
+            </div>
+            {% endblock page_header %}
+            
+            {% if app.session.hasFlash('error') %}
+				<div class="alert alert-error">
+					<button type="button" class="close" data-dismiss="alert">&times;</button>
+					<strong>Error!</strong> {{ app.session.flash('error') }}
+				</div>
+			{%  else %}
+				{% if app.session.hasFlash('success') %}
+					<div class="alert alert-success">
+						<button type="button" class="close" data-dismiss="alert">&times;</button>
+						<strong>Great!</strong> {{ app.session.flash('success') }}
+					</div>
+		        {% endif %}
+			{% endif %}
+			
+			{% block content_row %}
+                {% block content %}
+                	<div class="row-fluid">
+                		<div class="span12">
+	           	         {% block content_topbar %}
+	           	         <div class="topBar">
+	           	         	 {% block content_topbar_content %}
+	                    	<h2>Topbar</h2>
+	            	        	{% endblock content_topbar_content %}
+	            	        </div>
+	             	       {% endblock content_topbar %}
+	             	   </div>
+	          		</div>
+	                {% block content_content %}
+                    	<strong>Hier könnte Ihre Werbung stehen ... </strong>
+                    {% endblock content_content %}
+                {% endblock content %}
+            {% endblock content_row %}        
+         </div>
+    </div>
+    {% endblock container %}
+    
+	{% block footer %}<p>{{ "now"|date('Y') }} - {{ config['company'] }}</p>{% endblock %}

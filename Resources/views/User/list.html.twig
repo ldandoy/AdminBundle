@@ -1,0 +1,48 @@
+{% extends 'AdminBundle:Base:base.html.twig' %}
+
+{% block title %}StartPack | Admin - Login{% endblock title %}
+
+{% block headline %}Administration - Liste des utilisateurs{% endblock headline %}
+
+{% block content_topbar_content %}
+	<a href="{{ path('admin_user_add') }}" class="btn btn-success"><i class="icon-plus"></i> Ajouter un utilisateur</a>
+{% endblock content_topbar_content %}
+	
+{% block content_content %}
+    
+    		<table id="myTable" class="tablesorter"> 
+                <thead> 
+                    <tr> 
+                        <th>ID</th>
+                        <th>Email</th>
+                        <th width="100">Action</th> 
+                    </tr>
+                </thead> 
+                <tbody>
+                    {% for user in users %}
+                        <tr>
+                            <td>{{ user.id }}</td>
+                            <td>{{ user.email }}</td>
+                            <td>
+                                <a href="{{ path('admin_user_view', {'id': user.id}) }}"><i class="icon-eye-open"></i></a>
+                                <a href="{{ path('admin_user_edit',{'id' : user.id}) }}"><i class="icon-pencil"></i></a>
+                                <a href=""><i class="icon-trash"></i></a></td>
+                        </tr>
+                    {% endfor %}
+                </tbody> 
+            </table> 
+
+            <script type="text/javascript">
+                $(document).ready(function() { 
+console.log($("#myTable"));
+                    $("#myTable").tablecloth({
+                            theme: "stats",
+                            striped: true,
+                            sortable: true,
+                            condensed: false,
+                            bordered: false,
+                            clean: false
+                        });
+                    });
+            </script>
+{% endblock content_content %}
