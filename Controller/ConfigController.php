@@ -27,24 +27,61 @@ class ConfigController extends AbstractCoreController {
 	public function indexAction() {
 		$configs = $this->getDoctrine()->getRepository('CoreBundle:Config')->findAll();
 		$form = $this->createForm(new Form\ConfigType(), new Model\Config());
-
-		return array("configs" => $configs, 'activeConfig' => true, 'form' => $form->createView());
+		
+		foreach ($configs AS $config) {
+			$configsForm[$config->getId()] = $this->createForm(new Form\ConfigLineType(), $config)->createView();
+		}
+		
+		return array(
+			"configs" => $configsForm,
+			'activeConfig' => true,
+			'form' => $form->createView()
+		);
 	}
-
+	
 	/**
-	 * @Route("/add", name="admin_config_add")
+	 * @Route("/{id}/save", name="admin_config_save")
 	 * @Template()
 	 */
-	public function addAction() {
-		$config = new Model\Config();
-		$form = $this->createForm(new Form\ConfigType(), $config);
-
+	public function saveAction($id) {
+		if ($id) {
+			$config = $this->getDoctrine()->getRepository('CoreBundle:Config')->findOneById($id);
+			$form = $this->createForm(new Form\ConfigLineType(), $config);
+		} else {
+			$config = new Model\Config();
+			$form = $this->createForm(new Form\ConfigType(), $config);
+		}
+		
 		if ($this->getRequest()->getMethod() == 'POST') {
 			$form->bind($this->getRequest());
 			if ($form->isValid()) {
+				$this->get('session')->setFlash('success', "Configuration bien mise à jour");
 				$this->saveAndFlush($config);
-				// return $this->redirect($this->generateUrl('admin_config_index'));
+			} else {
+				$this->get('session')->setFlash('error', $form->getErrorsAsString());
 			}
 		}
+		
+		return $this->redirect($this->generateUrl('admin_config_index'));
+	}
+	
+	/**
+	 * @Route("/{id}/del", name="admin_config_del")
+	 * @Template()
+	 */
+	public function delAction($id) {
+		$em = $this->getDoctrine()->getEntityManager();
+		$config = $this->getDoctrine()->getRepository('CoreBundle:Config')->findOneById($id);
+		
+		if ($config) {
+			$em->remove($config);
+			$em->flush();
+			$this->get('session')->setFlash('success', "Configuration bien supprimé");
+		} else {
+			$this->get('session')->setFlash('error', 'Configruration non supprimé');
+		}
+		
+		
+		return $this->redirect($this->generateUrl('admin_config_index'));
 	}
 }

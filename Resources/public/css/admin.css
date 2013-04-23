@@ -1,6 +1,5 @@
 html,body {
-	background: #EEE;
-	padding-top: 60px;
+	padding-top: 30px;
 }
 
 .container .content {
@@ -21,4 +20,13 @@ html,body {
 
 .pagination {
 	text-align: center;
+}
+
+.topBar {
+	margin-bottom: 20px;
+}
+
+form {
+	margin: 0px;
+	padding: 0px;
 }

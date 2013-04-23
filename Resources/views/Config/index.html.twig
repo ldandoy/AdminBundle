@@ -1,35 +1,39 @@
 {% extends 'AdminBundle:Base:base.html.twig' %}
 {% form_theme form 'AdminBundle:Form:form_admin.html.twig' %}
 
-{% block title %}StartPack | Admin - Login{% endblock %}
+{% block title %}StartPack | Admin - Config{% endblock %}
 
-{% block body %}
-    <div class="row">
-    	<div class="span12">
-            <div class="page-header">
-                <h3 class="fLeft">Configuration du site</h3>
-                <div class="fRight">
-                    <a href="#myModal" role="button" data-toggle="modal" class="btn btn-success"><i class="icon-plus"></i> Ajouter un paramètre</a>
-                </div>
-                <br class="sep" />
-            </div>
-		</div>
-	</div>
+{% block headline %}Administration - Config{% endblock headline %}
 
-    {% for config in configs %}
-        <div class="row">
-            <div class="span4">
-                <label for="">{{ config.label }}</label>
-            </div>
+{% block content_topbar_content %}
+	<a href="#myModal" role="button" data-toggle="modal" class="btn btn-success"><i class="icon-plus"></i> Ajouter un paramètre</a>
+{% endblock content_topbar_content %}
 
-            <div class="span8">
-                <input type="text" class="span8" value="{{ config.value }}" />
-            </div>
-        </div>
-    {% endfor %}
-
+{% block content_content %}
+	<table class="table table-striped">
+		<thead>
+			<th>Label</th>
+			<th>Value</th>
+			<th>Action</th>
+		</thead>
+		<tbody>
+		{% for key, config in configs %}
+	        <tr>
+		        <form action="{{ path('admin_config_save', {'id': key}) }}" method="post"> 
+			        <td>{{ form_widget(config.label ) }}</td>
+			        <td>{{ form_widget(config.value ) }}</td>
+			        <td>
+						{{ form_rest(config) }}
+						<button class="btn btn-primary btn-mini"><i class="icon-pencil"></i> Edit</button>
+			        	<a href="{{ path('admin_config_del', {'id': key}) }}" class="btn btn-danger btn-mini"><i class="icon-trash"></i> Delete</a>
+			        </td>
+				</form>
+	        </tr>
+	    {% endfor %}
+	    </tbody>
+	</table>
     <div id="myModal" class="modal hide fade">
-        <form action="{{ path('admin_config_add') }}" method="post">
+        <form action="{{ path('admin_config_save', {'id': 0}) }}" method="post">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
                 <h3>Ajouter une paramètre de config</h3>
@@ -41,8 +45,8 @@
                     <br class="sep" />
                 </div>
                 <div class="">
-                    <div class="fLeft width30p">{{ form_label(form.key ) }}</div>
-                    <div class="fLeft width50p">{{ form_widget(form.key ) }}  {{ form_errors(form.key ) }}</div>
+                    <div class="fLeft width30p">{{ form_label(form.slug ) }}</div>
+                    <div class="fLeft width50p">{{ form_widget(form.slug ) }}  {{ form_errors(form.slug ) }}</div>
                     <br class="sep" />
                 </div>
                 <div class="">
@@ -53,6 +57,7 @@
             </div>
             <div class="modal-footer">
                 <a href="#" class="btn" class="close" data-dismiss="modal" aria-hidden="true">Close</a>
+                {{ form_rest(form) }}
                 <button class="btn btn-primary">Save changes</button>
             </div>
         </form>

@@ -1,14 +1,15 @@
 {% form_theme form 'AdminBundle:Form:form_admin.html.twig' %}
 {% extends 'AdminBundle:Base:base.html.twig' %}
 
-{% block title %}StartPack | Admin - add user{% endblock %}
+{% block title %}StartPack | Admin - Ajouter un utilisateur{% endblock %}
 
-{% block body %}
-    <div class="row marginTop30px">
-    	<div class="span12">
-            <h2 class="fLeft">Ajouter un utilisateur</h2>
-            <br class="sep" /> 
-    		<form action="" metod="post">
+{% block headline %}Administration - Ajouter un utilisateur{% endblock headline %}
+
+{% block content_topbar %} &nbsp; {% endblock content_topbar %}
+
+{% block content_content %}
+	<div class="row-fluid">
+    <form action="" metod="post">
                 <div class="">
                     <div class="fLeft width30p">{{ form_label(form.email) }}</div>
                     <div class="fLeft width50p">{{ form_widget(form.email) }} {{ form_errors(form.email) }}</div>
@@ -16,8 +17,7 @@
                 </div>
             </form>
             <p align="right">
-                <a href="{{ path('user_index') }}" class="btn">Retour</a>
+                <a href="{{ path('admin_user_index') }}" class="btn">Retour</a>
             </p>
-		</div>
-	</div>
-{% endblock %}
+      </div>
+{% endblock content_content %}
