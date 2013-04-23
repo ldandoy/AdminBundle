@@ -27,9 +27,9 @@ class UserController extends AbstractCoreController {
 		$users = $this->getDoctrine()->getRepository('CoreBundle:User')->findAll();
 
 		return array(
-			'users' => $users,
-			'config'		=> $this->getConfig(),
-			'activeUser' => true
+			'users'         => $users,
+			'config'	    => $this->getConfig(),
+			'activeUser'    => true
 		);
 	}
 
@@ -63,10 +63,10 @@ class UserController extends AbstractCoreController {
 			}
 		}
 		return array(
-			'user' 		=> $user,
-			'config'	=> $this->getConfig(),
-			'form' 		=> $form->createView(),
-			'activeUser' => true
+			'user' 		    => $user,
+			'config'	    => $this->getConfig(),
+			'form' 		    => $form->createView(),
+			'activeUser'    => true
 		);
 	}
 
@@ -76,6 +76,9 @@ class UserController extends AbstractCoreController {
 	 */
 	public function addAction() {
 		$form = $this->createForm(new Form\UserType(), new Model\User());
-		return array("form" => $form->createView(), "activeUser" => true);
+		return array(
+            "form"          => $form->createView(),
+            "activeUser"    => true
+        );
 	}
 }
