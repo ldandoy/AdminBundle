@@ -25,7 +25,9 @@ class AdminController extends AbstractCoreController {
 	 * @Template()
 	 */
 	public function indexAction() {
-		return array();
+		return array(
+			"config" => $this->getConfig()
+		);
 	}
 
 	/**

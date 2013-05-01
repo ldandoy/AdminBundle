@@ -23,10 +23,14 @@ class UserController extends AbstractCoreController {
 	 * @Route("/", name="admin_user_index")
 	 * @Template()
 	 */
-	public function indexAction() {
+	public function listAction() {
 		$users = $this->getDoctrine()->getRepository('CoreBundle:User')->findAll();
 
-		return array("users" => $users, 'activeUser' => true);
+		return array(
+			'users'         => $users,
+			'config'	    => $this->getConfig(),
+			'activeUser'    => true
+		);
 	}
 
 	/**
@@ -34,7 +38,11 @@ class UserController extends AbstractCoreController {
 	 * @Template()
 	 */
 	public function viewAction(Model\User $user) {
-		return array("user" => $user, 'activeUser' => true);
+		return array(
+			'user' 			=> $user,
+			'config'		=> $this->getConfig(),
+			'activeUser' 	=> true
+		);
 	}
 
 	/**
@@ -54,7 +62,12 @@ class UserController extends AbstractCoreController {
 				return $this->redirect($this->generateUrl('admin_user_edit', array('id' => $user->getId())));
 			}
 		}
-		return array("user" => $user, 'form' => $form->createView(), 'activeUser' => true);
+		return array(
+			'user' 		    => $user,
+			'config'	    => $this->getConfig(),
+			'form' 		    => $form->createView(),
+			'activeUser'    => true
+		);
 	}
 
 	/**
@@ -63,6 +76,9 @@ class UserController extends AbstractCoreController {
 	 */
 	public function addAction() {
 		$form = $this->createForm(new Form\UserType(), new Model\User());
-		return array("form" => $form->createView(), "activeUser" => true);
+		return array(
+            "form"          => $form->createView(),
+            "activeUser"    => true
+        );
 	}
 }
